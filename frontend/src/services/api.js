@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const baseUrl = process.env.REACT_APP_API_URL || "http://localhost:3001";
+const configuredBaseUrl = process.env.REACT_APP_API_URL || "http://localhost:3001";
+const baseUrl =
+  window.location.port === "3000" && configuredBaseUrl === "/api"
+    ? "http://localhost:3001"
+    : configuredBaseUrl;
 
 const api = {
   get: (endpoint) => axios.get(baseUrl + endpoint),
